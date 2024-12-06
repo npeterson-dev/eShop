@@ -19,3 +19,4 @@ app.NewVersionedApi("Catalog")
 
 app.UseDefaultOpenApi();
 app.Run();
+//testing
