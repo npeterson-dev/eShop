@@ -71,6 +71,6 @@ public sealed class CatalogAI : ICatalogAI
 
         return null;
     }
-
+    // pushing changes for sprint 1
     private static string CatalogItemToString(CatalogItem item) => $"{item.Name} {item.Description}";
 }
