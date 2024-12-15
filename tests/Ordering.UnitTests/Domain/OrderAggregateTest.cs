@@ -175,4 +175,33 @@ public class OrderAggregateTest
         //Assert
         Assert.AreEqual(fakeOrder.DomainEvents.Count, expectedResult);
     }
+
+    [TestMethod]
+    public void GetSalesTax_ShouldReturnCorrectSalesTax()
+    {
+        // Arrange
+        var order = new Order("userId", "userName", new Address(/* parameters */), 1, "1234567890123456", "123", "John Doe", DateTime.UtcNow.AddYears(1));
+        order.AddOrderItem(1, "Product A", 100m, 0m, "url", 2); // Total = 200
+
+        // Act
+        var salesTax = order.GetSalesTax();
+
+        // Assert
+        Assert.AreEqual(200 * 0.065m, salesTax);
+    }
+
+    [TestMethod]
+    public void GetGrandTotal_ShouldReturnCorrectGrandTotal()
+    {
+        // Arrange
+        var order = new Order("userId", "userName", new Address(/* parameters */), 1, "1234567890123456", "123", "John Doe", DateTime.UtcNow.AddYears(1));
+        order.AddOrderItem(1, "Product A", 100m, 0m, "url", 2); // Total = 200
+
+        // Act
+        var grandTotal = order.GetGrandTotal();
+
+        // Assert
+        Assert.AreEqual(200 + (200 * 0.065m), grandTotal);
+    }
+
 }

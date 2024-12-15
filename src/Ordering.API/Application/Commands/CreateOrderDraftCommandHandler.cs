@@ -24,6 +24,8 @@ public record OrderDraftDTO
 {
     public IEnumerable<OrderItemDTO> OrderItems { get; init; }
     public decimal Total { get; init; }
+    public decimal SalesTax { get; set; }
+    public decimal GrandTotal { get; set; }
 
     public static OrderDraftDTO FromOrder(Order order)
     {
@@ -38,7 +40,9 @@ public record OrderDraftDTO
                 Units = oi.Units,
                 ProductName = oi.ProductName
             }),
-            Total = order.GetTotal()
+            Total = order.GetTotal(),
+            SalesTax = order.GetSalesTax(),
+            GrandTotal = order.GetGrandTotal()
         };
     }
 }
